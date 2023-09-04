@@ -9,63 +9,30 @@ Multimodal AI is a technology that combines different types of data, such as tex
   - public : 12/536
   - private : 11/536
 
-## Tech Stack
-- Python
-- pandas
-- scikit-learn
-- XGBoost
-
 ## Data Sources
 The project uses the following data sources:
+- 'image/train' : Training data
+- 'image/test' : Test data 
 - `train.csv`: Training data
 - `test.csv`: Test data
-- `building_info.csv`: Building information data
-- if you want to get datas, please visit (https://dacon.io/competitions/official/236125/overview/description)
+- if you want to get datas, please visit (https://dacon.io/competitions/official/236118/data)
 
 ## Data Preprocessing
-- Load and preprocess training and test data.
-- Translate and label encode building information data.
-- Handle date and time data and create various time-related features.
-- Handle missing values and add interaction features.
+- The model utilizes the VQADataset class to process data. This class loads and preprocesses images and questions from a DataFrame. Additionally, it applies data augmentation to image data using RandAugment.
+
+## Model
+- Our multimodal AI model, based on the VILT architecture, excels at processing both text and image data. This model leverages the power of vision and language understanding to perform tasks such as image captioning, visual question answering, and more.
+- Kim, W., Son, B., & Kim, I. (2021). ViLT: Vision-and-Language Transformer Without Convolution or Region Supervision. In ICML 2021 Long Presentation. Retrieved from https://arxiv.org/abs/2102.03334
 
 ## Model Training
-- Train XGBoost models with different optimal hyperparameters for each building.
-- Optimal hyperparameters for each building are extracted from the `parameters_opt.csv` file.
-- Models are trained using XGBoost, aiming to minimize the weighted mean squared error.
+The training and evaluation processes are as follows:
 
-## Folder Structure
-```
-├── data/
-│   ├── train.csv
-│   ├── test.csv
-│   ├── building_info.csv
-├── codes/
-│   ├── preprocessing.py
-│   ├── model_tunning.py
-│   ├── inference.py
-│   ├── bayesian_optimization.py
-├── saved_models/
-│   ├── models_version_number/
-├── README.md
-├── script.py
-```
+Model Training: The train function is used to train the model. It processes mini-batch data and updates the model using an optimizer and scheduler.
 
-## Script.py
-To run the project pipeline, you can use the following command-line options:
-```
-- `-p` or `--preprocess`: Run data preprocessing.
-- `-t` or `--train`: Run model training.
-- `-i` or `--inference`: Run model inference.
-- `-b` or `--bayesian`: Run Bayesian optimization.
-- `proj_name`: Optional project name to be used for saving or loading models.
-```
-Example usage:
-```
-python script.py -p -t -i My_Project
-```
-## Evaluation Metrics
-The project uses the following evaluation metrics:
-- SMAPE (Symmetric Mean Absolute Percentage Error)
-- Weighted Mean Squared Error
+Inference: The inference function is used to perform inference with the trained model. This function generates predictions for input data.
+
+## ViLT-base-VQA.ipynb
+If you want to run the code, please see the 'ViLT-base-VQA.ipynb'
+
 
 
